@@ -8,8 +8,10 @@ import {
   Computer, Wifi, Build, VpnKey, MoreHoriz
 } from '@mui/icons-material';
 import { ticketAPI } from '../services/api';
+import { useTranslation } from '../translations';
 
 function Dashboard() {
+  const { t } = useTranslation();
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,7 +26,7 @@ function Dashboard() {
       const response = await ticketAPI.getTickets();
       setTickets(response.data);
     } catch (err) {
-      setError('加载数据失败');
+      setError(t('loadDataError'));
     } finally {
       setLoading(false);
     }
@@ -49,6 +51,7 @@ function Dashboard() {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
         <CircularProgress />
+        <Typography sx={{ ml: 1 }}>{t('loading')}</Typography>
       </Box>
     );
   }
@@ -60,7 +63,7 @@ function Dashboard() {
   return (
     <Box>
       <Typography variant="h4" component="h1" gutterBottom>
-        📊 数据统计看板
+        {t('dashboardTitle')}
       </Typography>
 
       {/* 总览卡片 */}
@@ -72,7 +75,7 @@ function Dashboard() {
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box>
                   <Typography color="text.secondary" variant="body2">
-                    总工单数
+                    {t('totalTickets')}
                   </Typography>
                   <Typography variant="h3" fontWeight="bold">
                     {stats.total}
@@ -91,7 +94,7 @@ function Dashboard() {
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box>
                   <Typography color="text.secondary" variant="body2">
-                    待处理
+                    {t('statuses.pending')}
                   </Typography>
                   <Typography variant="h3" fontWeight="bold">
                     {stats.pending}
@@ -110,7 +113,7 @@ function Dashboard() {
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box>
                   <Typography color="text.secondary" variant="body2">
-                    处理中
+                    {t('statuses.in_progress')}
                   </Typography>
                   <Typography variant="h3" fontWeight="bold">
                     {stats.in_progress}
@@ -129,7 +132,7 @@ function Dashboard() {
               <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Box>
                   <Typography color="text.secondary" variant="body2">
-                    已完成
+                    {t('completed')}
                   </Typography>
                   <Typography variant="h3" fontWeight="bold">
                     {stats.resolved + stats.closed}
@@ -145,7 +148,7 @@ function Dashboard() {
       {/* 类别分布 */}
       <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>
-          📁 问题类别分布
+          {t('categoryDistribution')}
         </Typography>
         <Grid container spacing={2} sx={{ mt: 1 }}>
           <Grid item xs={6} sm={4} md={2.4}>
@@ -155,7 +158,7 @@ function Dashboard() {
                 {stats.hardware}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                硬件问题
+                {t('categories.hardware')}
               </Typography>
             </Box>
           </Grid>
@@ -167,7 +170,7 @@ function Dashboard() {
                 {stats.software}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                软件问题
+                {t('categories.software')}
               </Typography>
             </Box>
           </Grid>
@@ -179,7 +182,7 @@ function Dashboard() {
                 {stats.network}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                网络问题
+                {t('categories.network')}
               </Typography>
             </Box>
           </Grid>
@@ -191,7 +194,7 @@ function Dashboard() {
                 {stats.permission}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                权限问题
+                {t('categories.permission')}
               </Typography>
             </Box>
           </Grid>
@@ -203,7 +206,7 @@ function Dashboard() {
                 {stats.other}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                其他
+                {t('categories.other')}
               </Typography>
             </Box>
           </Grid>
@@ -213,11 +216,11 @@ function Dashboard() {
       {/* 优先级统计 */}
       <Paper elevation={2} sx={{ p: 3 }}>
         <Typography variant="h6" gutterBottom>
-          ⚠️ 优先级分布
+          {t('priorityDistribution')}
         </Typography>
         <Box sx={{ mt: 2 }}>
           <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-            <Typography>紧急工单</Typography>
+            <Typography>{t('urgentTickets')}</Typography>
             <Chip 
               label={stats.urgent} 
               color="error" 
@@ -225,25 +228,25 @@ function Dashboard() {
             />
           </Box>
           <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-            <Typography>高优先级</Typography>
+            <Typography>{t('highPriority')}</Typography>
             <Chip 
-              label={tickets.filter(t => t.priority === 'high').length} 
+              label={tickets.filter(tkt => tkt.priority === 'high').length} 
               color="warning"
               sx={{ minWidth: 50, fontWeight: 'bold' }}
             />
           </Box>
           <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-            <Typography>中优先级</Typography>
+            <Typography>{t('mediumPriority')}</Typography>
             <Chip 
-              label={tickets.filter(t => t.priority === 'medium').length} 
+              label={tickets.filter(tkt => tkt.priority === 'medium').length} 
               color="primary"
               sx={{ minWidth: 50, fontWeight: 'bold' }}
             />
           </Box>
           <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Typography>低优先级</Typography>
+            <Typography>{t('lowPriority')}</Typography>
             <Chip 
-              label={tickets.filter(t => t.priority === 'low').length} 
+              label={tickets.filter(tkt => tkt.priority === 'low').length} 
               color="default"
               sx={{ minWidth: 50, fontWeight: 'bold' }}
             />
@@ -254,13 +257,13 @@ function Dashboard() {
       {/* 快速洞察 */}
       {stats.urgent > 0 && (
         <Alert severity="error" sx={{ mt: 3 }}>
-          ⚠️ 注意：当前有 {stats.urgent} 个紧急工单需要立即处理！
+          {t('alertUrgentWithCount').replace('{count}', stats.urgent)}
         </Alert>
       )}
 
       {stats.pending > 5 && (
         <Alert severity="warning" sx={{ mt: 2 }}>
-          📌 提示：有 {stats.pending} 个待处理工单，建议尽快分配。
+          {t('alertPendingWithCount').replace('{count}', stats.pending)}
         </Alert>
       )}
     </Box>

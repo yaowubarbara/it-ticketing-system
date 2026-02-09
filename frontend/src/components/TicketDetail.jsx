@@ -11,8 +11,10 @@ import {
 } from '@mui/icons-material';
 import { ticketAPI, employeeAPI } from '../services/api';
 import { toast } from 'react-toastify';
+import { useTranslation } from '../translations';
 
 function TicketDetail() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -55,7 +57,7 @@ function TicketDetail() {
         ai_response,
       });
     } catch (err) {
-      toast.error('加载工单失败: ' + err.message);
+      toast.error(t('loadTicketFailed') + ': ' + err.message);
     } finally {
       setLoading(false);
     }
@@ -111,7 +113,7 @@ function TicketDetail() {
 
   const handleAssign = async () => {
     if (!selectedEmployee) {
-      toast.warning('⚠️ 请选择IT人员');
+      toast.warning('⚠️ ' + t('pleaseSelectIT'));
       return;
     }
 
@@ -121,9 +123,9 @@ function TicketDetail() {
       setAssignDialogOpen(false);
       setSelectedEmployee('');
       loadTicket();
-      toast.success('✅ 工单分配成功！');
+      toast.success(t('assignSuccess'));
     } catch (err) {
-      toast.error('分配失败: ' + err.message);
+      toast.error(t('assignFailed') + ': ' + err.message);
     } finally {
       setOperationLoading(false);
     }
@@ -131,7 +133,7 @@ function TicketDetail() {
 
   const handleResolve = async () => {
     if (!resolutionNotes.trim()) {
-      toast.warning('⚠️ 请填写解决方案备注');
+      toast.warning('⚠️ ' + t('pleaseFillResolution'));
       return;
     }
 
@@ -141,9 +143,9 @@ function TicketDetail() {
       setResolveDialogOpen(false);
       setResolutionNotes('');
       loadTicket();
-      toast.success('✅ 工单已标记为已解决！');
+      toast.success(t('resolveSuccess'));
     } catch (err) {
-      toast.error('操作失败: ' + err.message);
+      toast.error(t('operationFailed') + ': ' + err.message);
     } finally {
       setOperationLoading(false);
     }
@@ -155,9 +157,9 @@ function TicketDetail() {
       await ticketAPI.closeTicket(id);
       setCloseDialogOpen(false);
       loadTicket();
-      toast.success('✅ 工单已关闭！');
+      toast.success(t('closeSuccess'));
     } catch (err) {
-      toast.error('关闭失败: ' + err.message);
+      toast.error(t('closeFailed') + ': ' + err.message);
     } finally {
       setOperationLoading(false);
     }
@@ -173,15 +175,7 @@ function TicketDetail() {
     return colors[status] || 'default';
   };
 
-  const getStatusText = (status) => {
-    const texts = {
-      pending: '待处理',
-      in_progress: '处理中',
-      resolved: '已解决',
-      closed: '已关闭',
-    };
-    return texts[status] || status;
-  };
+  const getStatusText = (status) => t(`statuses.${status}`) || status;
 
   const getPriorityColor = (priority) => {
     const colors = {
@@ -193,26 +187,8 @@ function TicketDetail() {
     return colors[priority] || 'default';
   };
 
-  const getPriorityText = (priority) => {
-    const texts = {
-      low: '低',
-      medium: '中',
-      high: '高',
-      urgent: '紧急',
-    };
-    return texts[priority] || priority;
-  };
-
-  const getCategoryText = (category) => {
-    const texts = {
-      hardware: '硬件问题',
-      software: '软件问题',
-      network: '网络问题',
-      permission: '权限问题',
-      other: '其他',
-    };
-    return texts[category] || category;
-  };
+  const getPriorityText = (priority) => t(`priorities.${priority}`) || priority;
+  const getCategoryText = (category) => t(`categories.${category}`) || category;
 
   if (loading && !ticket) {
     return (
@@ -225,9 +201,9 @@ function TicketDetail() {
   if (!ticket) {
     return (
       <Box>
-        <Alert severity="error">工单不存在或已被删除</Alert>
+        <Alert severity="error">{t('ticketNotFound')}</Alert>
         <Button onClick={() => navigate('/tickets')} sx={{ mt: 2 }}>
-          返回列表
+          {t('backToList')}
         </Button>
       </Box>
     );
@@ -242,10 +218,10 @@ function TicketDetail() {
             startIcon={<ArrowBack />}
             onClick={() => navigate('/tickets')}
           >
-            返回列表
+            {t('backToList')}
           </Button>
           <Typography variant="h5">
-            工单详情 - {ticket.ticket_number}
+            {t('ticketDetailTitle')} - {ticket.ticket_number}
           </Typography>
         </Box>
         <Chip
@@ -276,7 +252,7 @@ function TicketDetail() {
               />
               <Chip
                 icon={<CalendarToday />}
-                label={new Date(ticket.created_at).toLocaleString('zh-CN')}
+                label={new Date(ticket.created_at).toLocaleString()}
                 size="small"
                 variant="outlined"
               />
@@ -292,7 +268,7 @@ function TicketDetail() {
               <>
                 <Divider sx={{ my: 2 }} />
                 <Typography variant="subtitle2" gutterBottom>
-                  解决方案：
+                  {t('resolutionLabel')}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {ticket.resolution_notes}
@@ -305,12 +281,12 @@ function TicketDetail() {
           {ticket.ai_response ? (
             <Paper sx={{ p: 3, bgcolor: '#f5f5f5' }}>
               <Typography variant="h6" gutterBottom color="primary">
-                🤖 AI智能建议
+                {t('aiSuggestions')}
               </Typography>
 
               <Box my={2}>
                 <Typography variant="subtitle2" gutterBottom>
-                  建议分类：
+                  {t('suggestedCategory')}
                 </Typography>
                 <Chip
                   label={getCategoryText(ticket.ai_response.suggested_category)}
@@ -319,7 +295,7 @@ function TicketDetail() {
                 />
                 {ticket.ai_response.confidence_score != null && (
                   <Typography variant="caption" color="text.secondary" sx={{ ml: 1 }}>
-                    置信度:{' '}
+                    {t('confidence')}:{' '}
                     {(ticket.ai_response.confidence_score * 100).toFixed(0)}%
                   </Typography>
                 )}
@@ -328,7 +304,7 @@ function TicketDetail() {
               <Divider sx={{ my: 2 }} />
 
               <Typography variant="subtitle2" gutterBottom>
-                解决方案建议：
+                {t('solutionSuggestion')}
               </Typography>
               <Typography
                 variant="body2"
@@ -345,7 +321,7 @@ function TicketDetail() {
             </Paper>
           ) : (
             <Alert severity="info" icon={<CircularProgress size={20} />}>
-              AI正在分析中，请稍候...（预计需要10-20秒）
+              {t('aiAnalyzing')}
             </Alert>
           )}
         </Grid>
@@ -354,25 +330,25 @@ function TicketDetail() {
         <Grid item xs={12} md={4}>
           <Paper sx={{ p: 3, mb: 2 }}>
             <Typography variant="h6" gutterBottom>
-              工单信息
+              {t('ticketInfo')}
             </Typography>
 
             <Box my={2}>
               <Typography variant="body2" color="text.secondary">
-                提交人：{ticket.employee_name_snapshot}
+                {t('submitter')}：{ticket.employee_name_snapshot}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                工号：{ticket.employee_id}
+                {t('employeeIdShort')}：{ticket.employee_id}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                部门：{ticket.department_snapshot}
+                {t('departmentShort')}：{ticket.department_snapshot}
               </Typography>
             </Box>
 
             {ticket.assigned_to && (
               <Box my={2}>
                 <Typography variant="body2" color="text.secondary">
-                  负责人：{ticket.assigned_to}
+                  {t('assignee')}：{ticket.assigned_to}
                 </Typography>
               </Box>
             )}
@@ -388,7 +364,7 @@ function TicketDetail() {
                   onClick={() => setAssignDialogOpen(true)}
                   fullWidth
                 >
-                  分配工单
+                  {t('assignTicket')}
                 </Button>
               )}
 
@@ -400,7 +376,7 @@ function TicketDetail() {
                   onClick={() => setResolveDialogOpen(true)}
                   fullWidth
                 >
-                  标记已解决
+                  {t('markResolved')}
                 </Button>
               )}
 
@@ -411,7 +387,7 @@ function TicketDetail() {
                   onClick={() => setCloseDialogOpen(true)}
                   fullWidth
                 >
-                  关闭工单
+                  {t('closeTicket')}
                 </Button>
               )}
             </Box>

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Container, Button, Box } from '@mui/material';
-import { Home, Add, Book, Dashboard as DashIcon } from '@mui/icons-material';
+import { AppBar, Toolbar, Typography, Container, Button, Box, Select, MenuItem } from '@mui/material';
+import { Home, Add, Book, Dashboard as DashIcon, Language as LanguageIcon } from '@mui/icons-material';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -10,7 +10,12 @@ import CreateTicket from './components/CreateTicket';
 import TicketDetail from './components/TicketDetail';
 import KnowledgeBase from './components/KnowledgeBase';
 
+// 导入翻译功能
+import { useTranslation } from './translations';
+
 function App() {
+  const { t, language, changeLanguage } = useTranslation();
+
   return (
     <Router>
       <Box sx={{ flexGrow: 1 }}>
@@ -18,20 +23,42 @@ function App() {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              🎫 IT工单系统
+              {t('appTitle')}
             </Typography>
+            
             <Button color="inherit" component={Link} to="/" startIcon={<DashIcon />}>
-              统计看板
+              {t('dashboard')}
             </Button>
             <Button color="inherit" component={Link} to="/tickets" startIcon={<Home />}>
-              工单列表
+              {t('ticketList')}
             </Button>
             <Button color="inherit" component={Link} to="/create" startIcon={<Add />}>
-              创建工单
+              {t('createTicket')}
             </Button>
             <Button color="inherit" component={Link} to="/knowledge" startIcon={<Book />}>
-              知识库
+              {t('knowledge')}
             </Button>
+
+            {/* 语言切换器 */}
+            <Box sx={{ ml: 2, display: 'flex', alignItems: 'center' }}>
+              <LanguageIcon sx={{ mr: 1, color: 'white' }} />
+              <Select
+                value={language}
+                onChange={(e) => changeLanguage(e.target.value)}
+                size="small"
+                sx={{
+                  color: 'white',
+                  '.MuiOutlinedInput-notchedOutline': { borderColor: 'white' },
+                  '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: 'white' },
+                  '.MuiSvgIcon-root': { color: 'white' }
+                }}
+              >
+                <MenuItem value="en">🇬🇧 English</MenuItem>
+                <MenuItem value="fr">🇫🇷 Français</MenuItem>
+                <MenuItem value="nl">🇳🇱 Nederlands</MenuItem>
+                <MenuItem value="zh">🇨🇳 中文</MenuItem>
+              </Select>
+            </Box>
           </Toolbar>
         </AppBar>
 
