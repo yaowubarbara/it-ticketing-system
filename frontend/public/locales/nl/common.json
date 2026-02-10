@@ -1,0 +1,37 @@
+{
+  "appTitle": "IT Ticketsysteem",
+  "nav": {
+    "dashboard": "Dashboard",
+    "ticketList": "Tickets",
+    "createTicket": "Ticket Aanmaken",
+    "knowledgeBase": "Kennisbank"
+  },
+  "actions": {
+    "submit": "Indienen",
+    "cancel": "Annuleren",
+    "save": "Opslaan",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "refresh": "Vernieuwen",
+    "assign": "Toewijzen",
+    "resolve": "Oplossen",
+    "close": "Sluiten",
+    "back": "Terug",
+    "retry": "Opnieuw Proberen",
+    "confirm": "Bevestigen",
+    "create": "Aanmaken",
+    "search": "Zoeken"
+  },
+  "common": {
+    "loading": "Laden...",
+    "submitting": "Indienen...",
+    "saving": "Opslaan...",
+    "creating": "Aanmaken...",
+    "deleting": "Verwijderen...",
+    "total": "Totaal",
+    "display": "Weergeven",
+    "items": "items",
+    "noData": "Geen gegevens beschikbaar",
+    "error": "Fout"
+  }
+}

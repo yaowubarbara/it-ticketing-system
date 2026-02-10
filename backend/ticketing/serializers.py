@@ -5,10 +5,15 @@ from datetime import datetime
 
 class TicketSerializer(serializers.ModelSerializer):
     """工单序列化器（列表用，不包含embedding）"""
-    
+
     # 让 ticket_number 可选，由后端自动生成
     ticket_number = serializers.CharField(read_only=True)
-    
+
+    # 添加 *_display 字段用于翻译后的显示文本
+    status_display = serializers.CharField(source='get_status_display', read_only=True)
+    category_display = serializers.CharField(source='get_category_display', read_only=True)
+    priority_display = serializers.CharField(source='get_priority_display', read_only=True)
+
     class Meta:
         model = Ticket
         exclude = ['embedding']  # 排除大的向量字段
@@ -48,7 +53,10 @@ class TicketDetailSerializer(serializers.ModelSerializer):
 
 class EmployeeSerializer(serializers.ModelSerializer):
     """员工序列化器"""
-    
+
+    # 添加 role_display 字段用于翻译后的显示文本
+    role_display = serializers.CharField(source='get_role_display', read_only=True)
+
     class Meta:
         model = Employee
         fields = '__all__'

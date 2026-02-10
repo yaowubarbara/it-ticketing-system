@@ -1,0 +1,31 @@
+{
+  "title": "Dashboard",
+  "stats": {
+    "totalTickets": "Totaal Tickets",
+    "pending": "In Behandeling",
+    "inProgress": "Bezig",
+    "completed": "Voltooid"
+  },
+  "categoryDistribution": {
+    "title": "Categorieverdeling",
+    "hardware": "Hardwareproblemen",
+    "software": "Softwareproblemen",
+    "network": "Netwerkproblemen",
+    "permission": "Toestemmingsproblemen",
+    "other": "Anders"
+  },
+  "priorityDistribution": {
+    "title": "Prioriteitsverdeling",
+    "urgent": "Urgente Tickets",
+    "high": "Hoge Prioriteit",
+    "medium": "Gemiddelde Prioriteit",
+    "low": "Lage Prioriteit"
+  },
+  "alerts": {
+    "urgentTickets": "Waarschuwing: Er zijn {{count}} urgente tickets die onmiddellijke aandacht vereisen!",
+    "pendingTickets": "Opmerking: Er zijn {{count}} tickets in behandeling die wachten op toewijzing."
+  },
+  "errors": {
+    "loadFailed": "Laden van gegevens mislukt"
+  }
+}

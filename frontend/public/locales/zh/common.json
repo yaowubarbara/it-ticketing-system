@@ -1,0 +1,37 @@
+{
+  "appTitle": "IT工单系统",
+  "nav": {
+    "dashboard": "统计看板",
+    "ticketList": "工单列表",
+    "createTicket": "创建工单",
+    "knowledgeBase": "知识库"
+  },
+  "actions": {
+    "submit": "提交",
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "refresh": "刷新",
+    "assign": "分配",
+    "resolve": "解决",
+    "close": "关闭",
+    "back": "返回",
+    "retry": "重试",
+    "confirm": "确认",
+    "create": "创建",
+    "search": "搜索"
+  },
+  "common": {
+    "loading": "加载中...",
+    "submitting": "提交中...",
+    "saving": "保存中...",
+    "creating": "创建中...",
+    "deleting": "删除中...",
+    "total": "共",
+    "display": "显示",
+    "items": "个",
+    "noData": "暂无数据",
+    "error": "错误"
+  }
+}

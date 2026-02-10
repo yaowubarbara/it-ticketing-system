@@ -1,0 +1,109 @@
+{
+  "status": {
+    "pending": "In Behandeling",
+    "in_progress": "Bezig",
+    "resolved": "Opgelost",
+    "closed": "Gesloten",
+    "all": "Alle Statussen"
+  },
+  "priority": {
+    "low": "Laag",
+    "medium": "Gemiddeld",
+    "high": "Hoog",
+    "urgent": "Urgent",
+    "all": "Alle Prioriteiten"
+  },
+  "priorityDesc": {
+    "low": "Laag - Geen impact op werk",
+    "medium": "Gemiddeld - Kleine impact",
+    "high": "Hoog - Ernstige impact",
+    "urgent": "Urgent - Kan niet werken"
+  },
+  "category": {
+    "hardware": "Hardwareprobleem",
+    "software": "Softwareprobleem",
+    "network": "Netwerkprobleem",
+    "permission": "Toestemmingsprobleem",
+    "other": "Anders",
+    "all": "Alle Categorieën"
+  },
+  "categoryShort": {
+    "hardware": "Hardware",
+    "software": "Software",
+    "network": "Netwerk",
+    "permission": "Toestemming",
+    "other": "Anders"
+  },
+  "list": {
+    "title": "Ticketlijst",
+    "searchPlaceholder": "Zoek tickettitel, beschrijving of nummer...",
+    "statusFilter": "Status",
+    "categoryFilter": "Categorie",
+    "priorityFilter": "Prioriteit",
+    "showingResults": "{{count}} tickets weergegeven (van {{total}})",
+    "noTickets": "Nog geen tickets. Klik op \"Ticket Aanmaken\" om je eerste ticket aan te maken!",
+    "noMatchingTickets": "Geen overeenkomende tickets",
+    "createdAt": "Aangemaakt op"
+  },
+  "form": {
+    "title": "Tickettitel",
+    "description": "Beschrijving",
+    "category": "Categorie",
+    "priority": "Prioriteit",
+    "employeeId": "Medewerker ID",
+    "employeeName": "Naam Medewerker",
+    "department": "Afdeling",
+    "titlePlaceholder": "Korte beschrijving van het probleem, bijv.: Kan geen verbinding maken met WiFi",
+    "descriptionPlaceholder": "Gedetailleerde beschrijving van het probleem, inclusief foutmeldingen, geprobeerde oplossingen, etc.",
+    "employeeIdHelper": "Voor identificatie van de indiener"
+  },
+  "detail": {
+    "title": "Ticketdetails",
+    "ticketInfo": "Ticketinformatie",
+    "submitter": "Indiener",
+    "employeeId": "Medewerker ID",
+    "department": "Afdeling",
+    "assignedTo": "Toegewezen aan",
+    "assignTicket": "Ticket Toewijzen",
+    "markResolved": "Markeren als Opgelost",
+    "closeTicket": "Ticket Sluiten",
+    "resolutionNotes": "Oplossing",
+    "aiSuggestion": "AI Suggesties",
+    "suggestedCategory": "Voorgestelde Categorie",
+    "confidence": "Vertrouwen",
+    "suggestedSolution": "Voorgestelde Oplossing",
+    "aiAnalyzing": "AI analyseert, even geduld... (ongeveer 10-20 seconden)"
+  },
+  "dialog": {
+    "assignTitle": "Ticket Toewijzen",
+    "selectEmployee": "Selecteer IT Medewerker",
+    "resolveTitle": "Markeren als Opgelost",
+    "resolutionNotesLabel": "Oplossingsopmerkingen",
+    "resolutionNotesPlaceholder": "Beschrijf hoe het probleem is opgelost...",
+    "closeTitle": "Ticket Sluiten",
+    "closeConfirm": "Weet je zeker dat je dit ticket wilt sluiten? Deze actie kan niet ongedaan worden gemaakt.",
+    "confirmAssign": "Toewijzing Bevestigen",
+    "confirmResolve": "Oplossing Bevestigen",
+    "confirmClose": "Sluiting Bevestigen"
+  },
+  "messages": {
+    "createSuccess": "Ticket succesvol aangemaakt! AI analyseert...",
+    "createError": "Aanmaken van ticket mislukt",
+    "assignSuccess": "Ticket succesvol toegewezen!",
+    "assignError": "Toewijzen mislukt",
+    "resolveSuccess": "Ticket gemarkeerd als opgelost!",
+    "resolveError": "Bewerking mislukt",
+    "closeSuccess": "Ticket gesloten!",
+    "closeError": "Sluiten mislukt",
+    "loadError": "Laden van tickets mislukt",
+    "notFound": "Ticket niet gevonden of verwijderd",
+    "validationTitle": "Vul titel en beschrijving in",
+    "validationEmployee": "Selecteer een IT medewerker",
+    "validationNotes": "Vul oplossingsopmerkingen in"
+  },
+  "create": {
+    "title": "Nieuw Ticket Aanmaken",
+    "submitButton": "Ticket Indienen",
+    "aiHint": "Na indiening zal AI automatisch je probleem analyseren en oplossingsvoorstellen geven..."
+  }
+}

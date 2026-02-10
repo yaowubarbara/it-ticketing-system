@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 # ==================== Ticket 工单表 ====================
 class Ticket(models.Model):
@@ -7,27 +8,27 @@ class Ticket(models.Model):
     
     # 状态选择
     STATUS_CHOICES = [
-        ('pending', '待处理'),
-        ('in_progress', '处理中'),
-        ('resolved', '已解决'),
-        ('closed', '已关闭'),
+        ('pending', _('待处理')),
+        ('in_progress', _('处理中')),
+        ('resolved', _('已解决')),
+        ('closed', _('已关闭')),
     ]
     
     # 类别选择
     CATEGORY_CHOICES = [
-        ('hardware', '硬件问题'),
-        ('software', '软件问题'),
-        ('network', '网络问题'),
-        ('permission', '权限问题'),
-        ('other', '其他'),
+        ('hardware', _('硬件问题')),
+        ('software', _('软件问题')),
+        ('network', _('网络问题')),
+        ('permission', _('权限问题')),
+        ('other', _('其他')),
     ]
     
     # 优先级选择
     PRIORITY_CHOICES = [
-        ('low', '低'),
-        ('medium', '中'),
-        ('high', '高'),
-        ('urgent', '紧急'),
+        ('low', _('低')),
+        ('medium', _('中')),
+        ('high', _('高')),
+        ('urgent', _('紧急')),
     ]
     
     # 基础字段
@@ -82,9 +83,9 @@ class Employee(models.Model):
     """员工/用户表"""
     
     ROLE_CHOICES = [
-        ('employee', '普通员工'),
-        ('it_staff', 'IT人员'),
-        ('admin', '管理员'),
+        ('employee', _('普通员工')),
+        ('it_staff', _('IT人员')),
+        ('admin', _('管理员')),
     ]
     
     employee_id = models.CharField(max_length=50, primary_key=True, verbose_name='员工工号')

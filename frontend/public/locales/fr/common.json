@@ -1,0 +1,37 @@
+{
+  "appTitle": "Système de Tickets IT",
+  "nav": {
+    "dashboard": "Tableau de Bord",
+    "ticketList": "Tickets",
+    "createTicket": "Créer un Ticket",
+    "knowledgeBase": "Base de Connaissances"
+  },
+  "actions": {
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "refresh": "Actualiser",
+    "assign": "Assigner",
+    "resolve": "Résoudre",
+    "close": "Fermer",
+    "back": "Retour",
+    "retry": "Réessayer",
+    "confirm": "Confirmer",
+    "create": "Créer",
+    "search": "Rechercher"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "submitting": "Soumission...",
+    "saving": "Enregistrement...",
+    "creating": "Création...",
+    "deleting": "Suppression...",
+    "total": "Total",
+    "display": "Affichage",
+    "items": "éléments",
+    "noData": "Aucune donnée disponible",
+    "error": "Erreur"
+  }
+}
