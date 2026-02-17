@@ -32,5 +32,5 @@ RUN mkdir -p /app/staticfiles /app/mediafiles
 # 暴露端口
 EXPOSE 8000
 
-# 启动命令（将在docker-compose中覆盖）
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Default command (overridden by docker-compose)
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2"]

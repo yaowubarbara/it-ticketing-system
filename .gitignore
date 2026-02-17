@@ -1,4 +1,12 @@
 .env
+.env.local
 /venv/
 __pycache__/
 *.pyc
+*.pyo
+*.sqlite3
+.coverage
+htmlcov/
+staticfiles/
+node_modules/
+*.log

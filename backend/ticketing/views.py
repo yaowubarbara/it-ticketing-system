@@ -1,21 +1,22 @@
+import logging
+
 from rest_framework import generics, filters, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
-from datetime import datetime
 
-from .models import Ticket, Employee, AIResponse, KnowledgeBase, TicketHistory
+from .models import Ticket, Employee, KnowledgeBase, TicketHistory
 from .serializers import (
-    TicketSerializer, 
+    TicketSerializer,
     TicketDetailSerializer,
     EmployeeSerializer,
-    AIResponseSerializer,
     KnowledgeBaseSerializer,
-    TicketHistorySerializer
 )
-from .tasks import analyze_ticket_task, generate_knowledge_embedding_task 
-from .utils import generate_embedding
+from .tasks import analyze_ticket_task, generate_knowledge_embedding_task
+
+logger = logging.getLogger('ticketing.views')
 
 
 # ==================== Employee APIs ====================
@@ -52,7 +53,7 @@ class TicketListCreateView(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ['status', 'category', 'priority', 'employee_id', 'assigned_to']
     ordering_fields = ['created_at', 'priority']
-    
+
     def perform_create(self, serializer):
         """创建工单时触发AI分析"""
         ticket = serializer.save()
@@ -67,7 +68,7 @@ class TicketDetailView(generics.RetrieveUpdateDestroyAPIView):
     DELETE /api/tickets/<id>/  - 删除工单
     """
     queryset = Ticket.objects.all()
-    
+
     def get_serializer_class(self):
         """GET请求用详细序列化器，其他请求用普通序列化器"""
         if self.request.method == 'GET':
@@ -82,24 +83,24 @@ def assign_ticket(request, pk):
     """
     POST /api/tickets/<id>/assign/
     分配工单给IT人员
-    
+
     请求体：{"assigned_to": "IT001"}
     """
     ticket = get_object_or_404(Ticket, pk=pk)
     assigned_to = request.data.get('assigned_to')
-    
+
     if not assigned_to:
         return Response(
             {"error": "assigned_to字段是必需的"},
             status=status.HTTP_400_BAD_REQUEST
         )
-    
+
     # 更新工单
     old_assigned_to = ticket.assigned_to
     ticket.assigned_to = assigned_to
     ticket.status = 'in_progress'
     ticket.save()
-    
+
     # 记录历史
     TicketHistory.objects.create(
         ticket=ticket,
@@ -109,7 +110,7 @@ def assign_ticket(request, pk):
         changed_by=assigned_to,
         comment='工单已分配'
     )
-    
+
     return Response(
         TicketSerializer(ticket).data,
         status=status.HTTP_200_OK
@@ -121,24 +122,24 @@ def resolve_ticket(request, pk):
     """
     POST /api/tickets/<id>/resolve/
     标记工单为已解决
-    
+
     请求体：{"resolved_by": "IT001", "comment": "已重启路由器"}
     """
     ticket = get_object_or_404(Ticket, pk=pk)
     resolved_by = request.data.get('resolved_by')
     comment = request.data.get('comment', '')
-    
+
     if not resolved_by:
         return Response(
             {"error": "resolved_by字段是必需的"},
             status=status.HTTP_400_BAD_REQUEST
         )
-    
+
     # 更新工单
     ticket.status = 'resolved'
-    ticket.resolved_at = datetime.now()
+    ticket.resolved_at = timezone.now()
     ticket.save()
-    
+
     # 记录历史
     TicketHistory.objects.create(
         ticket=ticket,
@@ -148,7 +149,7 @@ def resolve_ticket(request, pk):
         changed_by=resolved_by,
         comment=comment
     )
-    
+
     return Response(
         TicketSerializer(ticket).data,
         status=status.HTTP_200_OK
@@ -160,24 +161,24 @@ def close_ticket(request, pk):
     """
     POST /api/tickets/<id>/close/
     关闭工单（用户确认）
-    
+
     请求体：{"closed_by": "W001", "comment": "问题已解决"}
     """
     ticket = get_object_or_404(Ticket, pk=pk)
     closed_by = request.data.get('closed_by')
     comment = request.data.get('comment', '')
-    
+
     if ticket.status != 'resolved':
         return Response(
             {"error": "只有已解决的工单才能关闭"},
             status=status.HTTP_400_BAD_REQUEST
         )
-    
+
     # 更新工单
     ticket.status = 'closed'
-    ticket.closed_at = datetime.now()
+    ticket.closed_at = timezone.now()
     ticket.save()
-    
+
     # 记录历史
     TicketHistory.objects.create(
         ticket=ticket,
@@ -187,7 +188,7 @@ def close_ticket(request, pk):
         changed_by=closed_by,
         comment=comment
     )
-    
+
     return Response(
         TicketSerializer(ticket).data,
         status=status.HTTP_200_OK
@@ -204,7 +205,7 @@ class KnowledgeBaseListCreateView(generics.ListCreateAPIView):
     """
     queryset = KnowledgeBase.objects.all().order_by('-created_at')
     serializer_class = KnowledgeBaseSerializer
-    
+
     def get_queryset(self):
         """按类别过滤"""
         queryset = super().get_queryset()
@@ -212,15 +213,12 @@ class KnowledgeBaseListCreateView(generics.ListCreateAPIView):
         if category:
             queryset = queryset.filter(category=category)
         return queryset
-    
+
     def perform_create(self, serializer):
-        """创建时异步生成向量"""
+        """Create knowledge article and trigger async embedding generation."""
         knowledge = serializer.save()
-        print(f"📝 知识库 #{knowledge.id} 已保存到数据库")
-        
-        # 异步生成向量（不阻塞HTTP响应）
+        logger.info("Knowledge #%s saved, submitting embedding task", knowledge.id)
         generate_knowledge_embedding_task.delay(knowledge.id)
-        print(f"📤 知识库 #{knowledge.id} 已提交向量生成任务")
 
 
 class KnowledgeBaseDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -232,11 +230,10 @@ class KnowledgeBaseDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = KnowledgeBase.objects.all()
     serializer_class = KnowledgeBaseSerializer
-    
+
     def perform_update(self, serializer):
         """更新时异步重新生成向量"""
         knowledge = serializer.save()
-        
-        # 异步重新生成向量
+
+        logger.info("Knowledge #%s updated, submitting embedding task", knowledge.id)
         generate_knowledge_embedding_task.delay(knowledge.id)
-        print(f"📤 知识库 #{knowledge.id} 已提交向量更新任务")

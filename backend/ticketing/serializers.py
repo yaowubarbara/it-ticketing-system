@@ -17,25 +17,25 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         exclude = ['embedding']  # 排除大的向量字段
-    
+
     def create(self, validated_data):
         # 自动生成工单号
         date_str = datetime.now().strftime('%Y%m%d')
-        
+
         # 获取今天的工单数量
         today_count = Ticket.objects.filter(
             ticket_number__startswith=f'TK{date_str}'
         ).count()
-        
+
         ticket_number = f'TK{date_str}{str(today_count + 1).zfill(3)}'
         validated_data['ticket_number'] = ticket_number
-        
+
         return super().create(validated_data)
 
 
 class AIResponseSerializer(serializers.ModelSerializer):
     """AI分析结果序列化器"""
-    
+
     class Meta:
         model = AIResponse
         fields = '__all__'
@@ -44,7 +44,7 @@ class AIResponseSerializer(serializers.ModelSerializer):
 class TicketDetailSerializer(serializers.ModelSerializer):
     """工单详情序列化器（包含AI分析）"""
     ai_responses = AIResponseSerializer(many=True, read_only=True)
-    
+
     class Meta:
         model = Ticket
         exclude = ['embedding']  # 详情页也不需要返回embedding
@@ -64,7 +64,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 class KnowledgeBaseSerializer(serializers.ModelSerializer):
     """知识库序列化器"""
-    
+
     class Meta:
         model = KnowledgeBase
         exclude = ['embedding']  # 同样排除embedding
@@ -72,7 +72,7 @@ class KnowledgeBaseSerializer(serializers.ModelSerializer):
 
 class TicketHistorySerializer(serializers.ModelSerializer):
     """工单历史序列化器"""
-    
+
     class Meta:
         model = TicketHistory
         fields = '__all__'
