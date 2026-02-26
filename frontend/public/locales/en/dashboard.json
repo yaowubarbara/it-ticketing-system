@@ -1,0 +1,31 @@
+{
+  "title": "Dashboard",
+  "stats": {
+    "totalTickets": "Total Tickets",
+    "pending": "Pending",
+    "inProgress": "In Progress",
+    "completed": "Completed"
+  },
+  "categoryDistribution": {
+    "title": "Category Distribution",
+    "hardware": "Hardware Issues",
+    "software": "Software Issues",
+    "network": "Network Issues",
+    "permission": "Permission Issues",
+    "other": "Other"
+  },
+  "priorityDistribution": {
+    "title": "Priority Distribution",
+    "urgent": "Urgent Tickets",
+    "high": "High Priority",
+    "medium": "Medium Priority",
+    "low": "Low Priority"
+  },
+  "alerts": {
+    "urgentTickets": "Warning: There are {{count}} urgent tickets requiring immediate attention!",
+    "pendingTickets": "Notice: There are {{count}} pending tickets awaiting assignment."
+  },
+  "errors": {
+    "loadFailed": "Failed to load data"
+  }
+}

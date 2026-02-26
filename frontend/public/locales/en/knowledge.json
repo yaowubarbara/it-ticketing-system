@@ -1,0 +1,47 @@
+{
+  "title": "Knowledge Base",
+  "stats": {
+    "total": "{{count}} knowledge documents",
+    "usageCount": "Usage Count",
+    "successRate": "Success Rate"
+  },
+  "list": {
+    "noDocuments": "No knowledge documents yet. Click \"Create Document\" to start adding!"
+  },
+  "actions": {
+    "createDocument": "Create Document",
+    "editDocument": "Edit",
+    "deleteDocument": "Delete"
+  },
+  "form": {
+    "title": "Title",
+    "content": "Content",
+    "category": "Category",
+    "tags": "Tags",
+    "contentPlaceholder": "Detailed description of the solution...",
+    "tagsPlaceholder": "Separate multiple tags with commas, e.g., printer, HP, color"
+  },
+  "dialog": {
+    "createTitle": "Create Knowledge Document",
+    "editTitle": "Edit Knowledge Document",
+    "deleteTitle": "Confirm Deletion",
+    "deleteConfirm": "Are you sure you want to delete the knowledge document \"{{title}}\"? This action cannot be undone.",
+    "aiHint": "Vectors will be automatically generated after saving for AI-powered similar case recommendations"
+  },
+  "messages": {
+    "createSuccess": "Knowledge document created successfully! Vectors have been generated.",
+    "createError": "Failed to create",
+    "updateSuccess": "Knowledge document updated successfully! Vectors have been regenerated.",
+    "updateError": "Failed to update",
+    "deleteSuccess": "Knowledge document deleted!",
+    "deleteError": "Failed to delete",
+    "loadError": "Failed to load knowledge base"
+  },
+  "category": {
+    "hardware": "Hardware Issue",
+    "software": "Software Issue",
+    "network": "Network Issue",
+    "permission": "Permission Issue",
+    "other": "Other"
+  }
+}

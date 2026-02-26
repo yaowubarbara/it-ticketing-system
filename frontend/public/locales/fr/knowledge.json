@@ -1,0 +1,47 @@
+{
+  "title": "Base de Connaissances",
+  "stats": {
+    "total": "{{count}} documents de connaissances",
+    "usageCount": "Nombre d'Utilisations",
+    "successRate": "Taux de Réussite"
+  },
+  "list": {
+    "noDocuments": "Aucun document de connaissances pour le moment. Cliquez sur \"Créer un Document\" pour commencer !"
+  },
+  "actions": {
+    "createDocument": "Créer un Document",
+    "editDocument": "Modifier",
+    "deleteDocument": "Supprimer"
+  },
+  "form": {
+    "title": "Titre",
+    "content": "Contenu",
+    "category": "Catégorie",
+    "tags": "Étiquettes",
+    "contentPlaceholder": "Description détaillée de la solution...",
+    "tagsPlaceholder": "Séparez plusieurs étiquettes par des virgules, ex : imprimante, HP, couleur"
+  },
+  "dialog": {
+    "createTitle": "Créer un Document de Connaissances",
+    "editTitle": "Modifier le Document de Connaissances",
+    "deleteTitle": "Confirmer la Suppression",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer le document de connaissances \"{{title}}\" ? Cette action est irréversible.",
+    "aiHint": "Les vecteurs seront automatiquement générés après l'enregistrement pour des recommandations de cas similaires par IA"
+  },
+  "messages": {
+    "createSuccess": "Document de connaissances créé avec succès ! Les vecteurs ont été générés.",
+    "createError": "Échec de la création",
+    "updateSuccess": "Document de connaissances mis à jour avec succès ! Les vecteurs ont été régénérés.",
+    "updateError": "Échec de la mise à jour",
+    "deleteSuccess": "Document de connaissances supprimé !",
+    "deleteError": "Échec de la suppression",
+    "loadError": "Échec du chargement de la base de connaissances"
+  },
+  "category": {
+    "hardware": "Problème Matériel",
+    "software": "Problème Logiciel",
+    "network": "Problème Réseau",
+    "permission": "Problème de Permission",
+    "other": "Autre"
+  }
+}
