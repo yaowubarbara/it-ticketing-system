@@ -1,0 +1,109 @@
+{
+  "status": {
+    "pending": "En Attente",
+    "in_progress": "En Cours",
+    "resolved": "Résolu",
+    "closed": "Fermé",
+    "all": "Tous les Statuts"
+  },
+  "priority": {
+    "low": "Faible",
+    "medium": "Moyen",
+    "high": "Élevé",
+    "urgent": "Urgent",
+    "all": "Toutes les Priorités"
+  },
+  "priorityDesc": {
+    "low": "Faible - Aucun impact sur le travail",
+    "medium": "Moyen - Impact mineur",
+    "high": "Élevé - Impact sévère",
+    "urgent": "Urgent - Incapacité de travailler"
+  },
+  "category": {
+    "hardware": "Problème Matériel",
+    "software": "Problème Logiciel",
+    "network": "Problème Réseau",
+    "permission": "Problème de Permission",
+    "other": "Autre",
+    "all": "Toutes les Catégories"
+  },
+  "categoryShort": {
+    "hardware": "Matériel",
+    "software": "Logiciel",
+    "network": "Réseau",
+    "permission": "Permission",
+    "other": "Autre"
+  },
+  "list": {
+    "title": "Liste des Tickets",
+    "searchPlaceholder": "Rechercher titre, description ou numéro de ticket...",
+    "statusFilter": "Statut",
+    "categoryFilter": "Catégorie",
+    "priorityFilter": "Priorité",
+    "showingResults": "Affichage de {{count}} tickets (sur {{total}})",
+    "noTickets": "Aucun ticket pour le moment. Cliquez sur \"Créer un Ticket\" pour créer votre premier ticket !",
+    "noMatchingTickets": "Aucun ticket correspondant",
+    "createdAt": "Créé le"
+  },
+  "form": {
+    "title": "Titre du Ticket",
+    "description": "Description",
+    "category": "Catégorie",
+    "priority": "Priorité",
+    "employeeId": "ID Employé",
+    "employeeName": "Nom de l'Employé",
+    "department": "Département",
+    "titlePlaceholder": "Brève description du problème, ex : Impossible de se connecter au WiFi",
+    "descriptionPlaceholder": "Description détaillée du problème, y compris les messages d'erreur, solutions tentées, etc.",
+    "employeeIdHelper": "Pour identifier l'auteur"
+  },
+  "detail": {
+    "title": "Détails du Ticket",
+    "ticketInfo": "Informations du Ticket",
+    "submitter": "Demandeur",
+    "employeeId": "ID Employé",
+    "department": "Département",
+    "assignedTo": "Assigné à",
+    "assignTicket": "Assigner le Ticket",
+    "markResolved": "Marquer comme Résolu",
+    "closeTicket": "Fermer le Ticket",
+    "resolutionNotes": "Résolution",
+    "aiSuggestion": "Suggestions IA",
+    "suggestedCategory": "Catégorie Suggérée",
+    "confidence": "Confiance",
+    "suggestedSolution": "Solution Suggérée",
+    "aiAnalyzing": "L'IA analyse, veuillez patienter... (environ 10-20 secondes)"
+  },
+  "dialog": {
+    "assignTitle": "Assigner le Ticket",
+    "selectEmployee": "Sélectionner un Technicien IT",
+    "resolveTitle": "Marquer comme Résolu",
+    "resolutionNotesLabel": "Notes de Résolution",
+    "resolutionNotesPlaceholder": "Décrivez comment le problème a été résolu...",
+    "closeTitle": "Fermer le Ticket",
+    "closeConfirm": "Êtes-vous sûr de vouloir fermer ce ticket ? Cette action est irréversible.",
+    "confirmAssign": "Confirmer l'Assignation",
+    "confirmResolve": "Confirmer la Résolution",
+    "confirmClose": "Confirmer la Fermeture"
+  },
+  "messages": {
+    "createSuccess": "Ticket créé avec succès ! L'IA analyse...",
+    "createError": "Échec de la création du ticket",
+    "assignSuccess": "Ticket assigné avec succès !",
+    "assignError": "Échec de l'assignation",
+    "resolveSuccess": "Ticket marqué comme résolu !",
+    "resolveError": "Échec de l'opération",
+    "closeSuccess": "Ticket fermé !",
+    "closeError": "Échec de la fermeture",
+    "loadError": "Échec du chargement des tickets",
+    "notFound": "Ticket introuvable ou supprimé",
+    "validationTitle": "Veuillez remplir le titre et la description",
+    "validationEmployee": "Veuillez sélectionner un technicien IT",
+    "validationNotes": "Veuillez remplir les notes de résolution"
+  },
+  "create": {
+    "title": "Créer un Nouveau Ticket",
+    "submitButton": "Soumettre le Ticket",
+    "aiHint": "Après la soumission, l'IA analysera automatiquement votre problème et fournira des suggestions de solution..."
+  }
+}

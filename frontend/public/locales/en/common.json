@@ -1,0 +1,37 @@
+{
+  "appTitle": "IT Ticketing System",
+  "nav": {
+    "dashboard": "Dashboard",
+    "ticketList": "Tickets",
+    "createTicket": "Create Ticket",
+    "knowledgeBase": "Knowledge Base"
+  },
+  "actions": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "refresh": "Refresh",
+    "assign": "Assign",
+    "resolve": "Resolve",
+    "close": "Close",
+    "back": "Back",
+    "retry": "Retry",
+    "confirm": "Confirm",
+    "create": "Create",
+    "search": "Search"
+  },
+  "common": {
+    "loading": "Loading...",
+    "submitting": "Submitting...",
+    "saving": "Saving...",
+    "creating": "Creating...",
+    "deleting": "Deleting...",
+    "total": "Total",
+    "display": "Showing",
+    "items": "items",
+    "noData": "No data available",
+    "error": "Error"
+  }
+}

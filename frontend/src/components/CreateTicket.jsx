@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Box, TextField, Button, MenuItem, Paper, Typography,
   Alert, CircularProgress
@@ -10,6 +11,7 @@ import { toast } from 'react-toastify';
 
 function CreateTicket() {
   const navigate = useNavigate();
+  const { t } = useTranslation(['common', 'ticket']);
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -34,7 +36,7 @@ function CreateTicket() {
     
     // 简单验证
     if (!formData.title.trim() || !formData.description.trim()) {
-      toast.warning('⚠️ 请填写标题和描述');
+      toast.warning(`⚠️ ${t('ticket:messages.validationTitle')}`);
       return;
     }
 
@@ -42,8 +44,8 @@ function CreateTicket() {
       setLoading(true);
       
       const response = await ticketAPI.createTicket(formData);
-      
-      toast.success('✅ 工单创建成功！AI正在分析中...');
+
+      toast.success(`✅ ${t('ticket:messages.createSuccess')}`);
       
       // 稍等一下再跳转，让用户看到通知
       setTimeout(() => {
@@ -51,7 +53,7 @@ function CreateTicket() {
       }, 1000);
       
     } catch (err) {
-      toast.error('❌ 创建工单失败: ' + err.message);
+      toast.error(`❌ ${t('ticket:messages.createError')}: ${err.message}`);
       console.error('Error creating ticket:', err);
     } finally {
       setLoading(false);
@@ -61,7 +63,7 @@ function CreateTicket() {
   return (
     <Box maxWidth="md" mx="auto">
       <Typography variant="h4" component="h1" mb={3}>
-        ✍️ 创建新工单
+        ✍️ {t('ticket:create.title')}
       </Typography>
 
       <Paper elevation={3} sx={{ p: 3 }}>
@@ -70,12 +72,12 @@ function CreateTicket() {
           <TextField
             fullWidth
             required
-            label="工单标题"
+            label={t('ticket:form.title')}
             name="title"
             value={formData.title}
             onChange={handleChange}
             margin="normal"
-            placeholder="简短描述问题，例如：无法连接WiFi"
+            placeholder={t('ticket:form.titlePlaceholder')}
           />
 
           {/* 详细描述 */}
@@ -84,12 +86,12 @@ function CreateTicket() {
             required
             multiline
             rows={4}
-            label="详细描述"
+            label={t('ticket:form.description')}
             name="description"
             value={formData.description}
             onChange={handleChange}
             margin="normal"
-            placeholder="详细描述遇到的问题，包括错误信息、尝试过的解决方法等"
+            placeholder={t('ticket:form.descriptionPlaceholder')}
           />
 
           {/* 分类 */}
@@ -97,17 +99,17 @@ function CreateTicket() {
             fullWidth
             select
             required
-            label="问题类别"
+            label={t('ticket:form.category')}
             name="category"
             value={formData.category}
             onChange={handleChange}
             margin="normal"
           >
-            <MenuItem value="hardware">硬件问题</MenuItem>
-            <MenuItem value="software">软件问题</MenuItem>
-            <MenuItem value="network">网络问题</MenuItem>
-            <MenuItem value="permission">权限问题</MenuItem>
-            <MenuItem value="other">其他</MenuItem>
+            <MenuItem value="hardware">{t('ticket:category.hardware')}</MenuItem>
+            <MenuItem value="software">{t('ticket:category.software')}</MenuItem>
+            <MenuItem value="network">{t('ticket:category.network')}</MenuItem>
+            <MenuItem value="permission">{t('ticket:category.permission')}</MenuItem>
+            <MenuItem value="other">{t('ticket:category.other')}</MenuItem>
           </TextField>
 
           {/* 优先级 */}
@@ -115,32 +117,32 @@ function CreateTicket() {
             fullWidth
             select
             required
-            label="优先级"
+            label={t('ticket:form.priority')}
             name="priority"
             value={formData.priority}
             onChange={handleChange}
             margin="normal"
           >
-            <MenuItem value="low">低 - 不影响工作</MenuItem>
-            <MenuItem value="medium">中 - 轻微影响</MenuItem>
-            <MenuItem value="high">高 - 严重影响</MenuItem>
-            <MenuItem value="urgent">紧急 - 完全无法工作</MenuItem>
+            <MenuItem value="low">{t('ticket:priorityDesc.low')}</MenuItem>
+            <MenuItem value="medium">{t('ticket:priorityDesc.medium')}</MenuItem>
+            <MenuItem value="high">{t('ticket:priorityDesc.high')}</MenuItem>
+            <MenuItem value="urgent">{t('ticket:priorityDesc.urgent')}</MenuItem>
           </TextField>
 
           {/* 员工信息 */}
           <TextField
             fullWidth
-            label="员工工号"
+            label={t('ticket:form.employeeId')}
             name="employee_id"
             value={formData.employee_id}
             onChange={handleChange}
             margin="normal"
-            helperText="用于识别提交人身份"
+            helperText={t('ticket:form.employeeIdHelper')}
           />
 
           <TextField
             fullWidth
-            label="员工姓名"
+            label={t('ticket:form.employeeName')}
             name="employee_name_snapshot"
             value={formData.employee_name_snapshot}
             onChange={handleChange}
@@ -149,7 +151,7 @@ function CreateTicket() {
 
           <TextField
             fullWidth
-            label="所属部门"
+            label={t('ticket:form.department')}
             name="department_snapshot"
             value={formData.department_snapshot}
             onChange={handleChange}
@@ -166,7 +168,7 @@ function CreateTicket() {
               startIcon={loading ? <CircularProgress size={20} /> : <Send />}
               disabled={loading}
             >
-              {loading ? '提交中...' : '提交工单'}
+              {loading ? t('common:submitting') : t('ticket:create.submitButton')}
             </Button>
             
             <Button
@@ -176,7 +178,7 @@ function CreateTicket() {
               onClick={() => navigate('/')}
               disabled={loading}
             >
-              取消
+              {t('common:actions.cancel')}
             </Button>
           </Box>
         </form>
@@ -184,7 +186,7 @@ function CreateTicket() {
 
       {/* 提示信息 */}
       <Alert severity="info" sx={{ mt: 3 }}>
-        💡 提交后，AI将自动分析您的问题并提供解决建议，请稍候...
+        💡 {t('ticket:create.aiHint')}
       </Alert>
     </Box>
   );

@@ -1,0 +1,109 @@
+{
+  "status": {
+    "pending": "Pending",
+    "in_progress": "In Progress",
+    "resolved": "Resolved",
+    "closed": "Closed",
+    "all": "All Status"
+  },
+  "priority": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "urgent": "Urgent",
+    "all": "All Priority"
+  },
+  "priorityDesc": {
+    "low": "Low - No impact on work",
+    "medium": "Medium - Minor impact",
+    "high": "High - Severe impact",
+    "urgent": "Urgent - Unable to work"
+  },
+  "category": {
+    "hardware": "Hardware Issue",
+    "software": "Software Issue",
+    "network": "Network Issue",
+    "permission": "Permission Issue",
+    "other": "Other",
+    "all": "All Categories"
+  },
+  "categoryShort": {
+    "hardware": "Hardware",
+    "software": "Software",
+    "network": "Network",
+    "permission": "Permission",
+    "other": "Other"
+  },
+  "list": {
+    "title": "Ticket List",
+    "searchPlaceholder": "Search ticket title, description or number...",
+    "statusFilter": "Status",
+    "categoryFilter": "Category",
+    "priorityFilter": "Priority",
+    "showingResults": "Showing {{count}} tickets (out of {{total}})",
+    "noTickets": "No tickets yet. Click \"Create Ticket\" button to create your first ticket!",
+    "noMatchingTickets": "No matching tickets",
+    "createdAt": "Created at"
+  },
+  "form": {
+    "title": "Ticket Title",
+    "description": "Description",
+    "category": "Category",
+    "priority": "Priority",
+    "employeeId": "Employee ID",
+    "employeeName": "Employee Name",
+    "department": "Department",
+    "titlePlaceholder": "Brief description of the issue, e.g., Cannot connect to WiFi",
+    "descriptionPlaceholder": "Detailed description of the issue, including error messages, attempted solutions, etc.",
+    "employeeIdHelper": "For identifying the submitter"
+  },
+  "detail": {
+    "title": "Ticket Details",
+    "ticketInfo": "Ticket Information",
+    "submitter": "Submitter",
+    "employeeId": "Employee ID",
+    "department": "Department",
+    "assignedTo": "Assigned To",
+    "assignTicket": "Assign Ticket",
+    "markResolved": "Mark as Resolved",
+    "closeTicket": "Close Ticket",
+    "resolutionNotes": "Resolution",
+    "aiSuggestion": "AI Suggestions",
+    "suggestedCategory": "Suggested Category",
+    "confidence": "Confidence",
+    "suggestedSolution": "Suggested Solution",
+    "aiAnalyzing": "AI is analyzing, please wait... (estimated 10-20 seconds)"
+  },
+  "dialog": {
+    "assignTitle": "Assign Ticket",
+    "selectEmployee": "Select IT Staff",
+    "resolveTitle": "Mark as Resolved",
+    "resolutionNotesLabel": "Resolution Notes",
+    "resolutionNotesPlaceholder": "Describe how the issue was resolved...",
+    "closeTitle": "Close Ticket",
+    "closeConfirm": "Are you sure you want to close this ticket? This action cannot be undone.",
+    "confirmAssign": "Confirm Assignment",
+    "confirmResolve": "Confirm Resolution",
+    "confirmClose": "Confirm Close"
+  },
+  "messages": {
+    "createSuccess": "Ticket created successfully! AI is analyzing...",
+    "createError": "Failed to create ticket",
+    "assignSuccess": "Ticket assigned successfully!",
+    "assignError": "Failed to assign",
+    "resolveSuccess": "Ticket marked as resolved!",
+    "resolveError": "Operation failed",
+    "closeSuccess": "Ticket closed!",
+    "closeError": "Failed to close",
+    "loadError": "Failed to load tickets",
+    "notFound": "Ticket not found or has been deleted",
+    "validationTitle": "Please fill in title and description",
+    "validationEmployee": "Please select an IT staff member",
+    "validationNotes": "Please fill in resolution notes"
+  },
+  "create": {
+    "title": "Create New Ticket",
+    "submitButton": "Submit Ticket",
+    "aiHint": "After submission, AI will automatically analyze your issue and provide solution suggestions..."
+  }
+}

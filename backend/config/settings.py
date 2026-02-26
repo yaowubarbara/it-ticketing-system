@@ -19,11 +19,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -40,7 +35,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'django_prometheus', 
+    'django_prometheus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,15 +45,16 @@ INSTALLED_APPS = [
     # 第三方应用
     'rest_framework',
     'corsheaders',
-    
+
     # 我们的应用
-    'ticketing',  
+    'ticketing',
 ]
 
 MIDDLEWARE = [
-    'django_prometheus.middleware.PrometheusBeforeMiddleware',  # ← 添加这行
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -96,7 +92,7 @@ DATABASES = {
         "NAME": os.environ.get("POSTGRES_DB", "ticketing_db"),
         "USER": os.environ.get("POSTGRES_USER", "postgres"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres123"),
-        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),  # 本地开发默认 localhost
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
     }
 }
@@ -124,11 +120,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'UTC'
+LANGUAGES = [
+    ('en', 'English'),
+    ('zh-hans', '中文'),
+    ('fr', 'Français'),
+    ('nl', 'Nederlands'),
+]
 
 USE_I18N = True
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
+TIME_ZONE = 'UTC'
 
 USE_TZ = True
 
@@ -145,27 +152,22 @@ CORS_ALLOWED_ORIGINS = [
 
 # REST Framework设置
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
-}
-
-# ==================== Celery配置 ====================
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Redis作为消息队列
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Redis存储任务结果
-CELERY_ACCEPT_CONTENT = ['json']  # 接受JSON格式
-CELERY_TASK_SERIALIZER = 'json'  # 任务序列化为JSON
-CELERY_RESULT_SERIALIZER = 'json'  # 结果序列化为JSON
-CELERY_TIMEZONE = 'Asia/Shanghai'  # 时区
-CELERY_TASK_TRACK_STARTED = True  # 追踪任务开始状态
-CELERY_TASK_TIME_LIMIT = 30 * 60  # 任务最长执行时间（30分钟）
-
-# REST Framework 配置
-REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
+# ==================== Celery配置 ====================
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Shanghai'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60

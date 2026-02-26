@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                 ('confidence_score', models.DecimalField(decimal_places=2, max_digits=3, verbose_name='置信度')),
                 ('suggested_solution', models.TextField(verbose_name='建议解决方案')),
                 ('similar_tickets', models.JSONField(blank=True, default=list, verbose_name='相似历史工单')),
-                ('model_used', models.CharField(default='claude-sonnet-4', max_length=50, verbose_name='使用的模型')),
+                ('model_used', models.CharField(default='gpt-4o-mini', max_length=50, verbose_name='使用的模型')),
                 ('processing_time_ms', models.IntegerField(blank=True, null=True, verbose_name='处理时间(毫秒)')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
                 ('ticket', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ai_responses', to='ticketing.ticket', verbose_name='关联工单')),

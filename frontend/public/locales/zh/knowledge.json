@@ -1,0 +1,47 @@
+{
+  "title": "知识库管理",
+  "stats": {
+    "total": "共 {{count}} 篇知识库文档",
+    "usageCount": "使用次数",
+    "successRate": "成功率"
+  },
+  "list": {
+    "noDocuments": "暂无知识库文档，点击"新建文档"开始添加！"
+  },
+  "actions": {
+    "createDocument": "新建文档",
+    "editDocument": "编辑",
+    "deleteDocument": "删除"
+  },
+  "form": {
+    "title": "标题",
+    "content": "内容",
+    "category": "类别",
+    "tags": "标签",
+    "contentPlaceholder": "详细描述问题的解决方案...",
+    "tagsPlaceholder": "多个标签用逗号分隔，例如：打印机, HP, 彩色"
+  },
+  "dialog": {
+    "createTitle": "新建知识库文档",
+    "editTitle": "编辑知识库文档",
+    "deleteTitle": "确认删除",
+    "deleteConfirm": "确定要删除知识库文档 \"{{title}}\" 吗？此操作不可恢复。",
+    "aiHint": "保存后将自动生成向量，用于AI智能推荐相似案例"
+  },
+  "messages": {
+    "createSuccess": "知识库文档创建成功！向量已自动生成。",
+    "createError": "创建失败",
+    "updateSuccess": "知识库文档更新成功！向量已重新生成。",
+    "updateError": "更新失败",
+    "deleteSuccess": "知识库文档已删除！",
+    "deleteError": "删除失败",
+    "loadError": "加载知识库失败"
+  },
+  "category": {
+    "hardware": "硬件问题",
+    "software": "软件问题",
+    "network": "网络问题",
+    "permission": "权限问题",
+    "other": "其他"
+  }
+}

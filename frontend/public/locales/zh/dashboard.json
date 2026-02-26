@@ -1,0 +1,31 @@
+{
+  "title": "数据统计看板",
+  "stats": {
+    "totalTickets": "总工单数",
+    "pending": "待处理",
+    "inProgress": "处理中",
+    "completed": "已完成"
+  },
+  "categoryDistribution": {
+    "title": "问题类别分布",
+    "hardware": "硬件问题",
+    "software": "软件问题",
+    "network": "网络问题",
+    "permission": "权限问题",
+    "other": "其他"
+  },
+  "priorityDistribution": {
+    "title": "优先级分布",
+    "urgent": "紧急工单",
+    "high": "高优先级",
+    "medium": "中优先级",
+    "low": "低优先级"
+  },
+  "alerts": {
+    "urgentTickets": "注意：当前有 {{count}} 个紧急工单需要立即处理！",
+    "pendingTickets": "提示：有 {{count}} 个待处理工单，建议尽快分配。"
+  },
+  "errors": {
+    "loadFailed": "加载数据失败"
+  }
+}

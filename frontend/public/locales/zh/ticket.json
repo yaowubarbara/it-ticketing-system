@@ -1,0 +1,109 @@
+{
+  "status": {
+    "pending": "待处理",
+    "in_progress": "处理中",
+    "resolved": "已解决",
+    "closed": "已关闭",
+    "all": "全部状态"
+  },
+  "priority": {
+    "low": "低",
+    "medium": "中",
+    "high": "高",
+    "urgent": "紧急",
+    "all": "全部优先级"
+  },
+  "priorityDesc": {
+    "low": "低 - 不影响工作",
+    "medium": "中 - 轻微影响",
+    "high": "高 - 严重影响",
+    "urgent": "紧急 - 完全无法工作"
+  },
+  "category": {
+    "hardware": "硬件问题",
+    "software": "软件问题",
+    "network": "网络问题",
+    "permission": "权限问题",
+    "other": "其他",
+    "all": "全部类别"
+  },
+  "categoryShort": {
+    "hardware": "硬件",
+    "software": "软件",
+    "network": "网络",
+    "permission": "权限",
+    "other": "其他"
+  },
+  "list": {
+    "title": "工单列表",
+    "searchPlaceholder": "搜索工单标题、描述或编号...",
+    "statusFilter": "状态",
+    "categoryFilter": "类别",
+    "priorityFilter": "优先级",
+    "showingResults": "显示 {{count}} 个工单（共 {{total}} 个）",
+    "noTickets": "暂无工单，点击顶部"创建工单"按钮创建第一个工单吧！",
+    "noMatchingTickets": "没有符合条件的工单",
+    "createdAt": "创建于"
+  },
+  "form": {
+    "title": "工单标题",
+    "description": "详细描述",
+    "category": "问题类别",
+    "priority": "优先级",
+    "employeeId": "员工工号",
+    "employeeName": "员工姓名",
+    "department": "所属部门",
+    "titlePlaceholder": "简短描述问题，例如：无法连接WiFi",
+    "descriptionPlaceholder": "详细描述遇到的问题，包括错误信息、尝试过的解决方法等",
+    "employeeIdHelper": "用于识别提交人身份"
+  },
+  "detail": {
+    "title": "工单详情",
+    "ticketInfo": "工单信息",
+    "submitter": "提交人",
+    "employeeId": "工号",
+    "department": "部门",
+    "assignedTo": "负责人",
+    "assignTicket": "分配工单",
+    "markResolved": "标记已解决",
+    "closeTicket": "关闭工单",
+    "resolutionNotes": "解决方案",
+    "aiSuggestion": "AI智能建议",
+    "suggestedCategory": "建议分类",
+    "confidence": "置信度",
+    "suggestedSolution": "解决方案建议",
+    "aiAnalyzing": "AI正在分析中，请稍候...（预计需要10-20秒）"
+  },
+  "dialog": {
+    "assignTitle": "分配工单",
+    "selectEmployee": "选择IT人员",
+    "resolveTitle": "标记为已解决",
+    "resolutionNotesLabel": "解决方案备注",
+    "resolutionNotesPlaceholder": "请描述如何解决了这个问题...",
+    "closeTitle": "关闭工单",
+    "closeConfirm": "确认关闭此工单吗？关闭后将无法再修改。",
+    "confirmAssign": "确认分配",
+    "confirmResolve": "确认解决",
+    "confirmClose": "确认关闭"
+  },
+  "messages": {
+    "createSuccess": "工单创建成功！AI正在分析中...",
+    "createError": "创建工单失败",
+    "assignSuccess": "工单分配成功！",
+    "assignError": "分配失败",
+    "resolveSuccess": "工单已标记为已解决！",
+    "resolveError": "操作失败",
+    "closeSuccess": "工单已关闭！",
+    "closeError": "关闭失败",
+    "loadError": "加载工单失败",
+    "notFound": "工单不存在或已被删除",
+    "validationTitle": "请填写标题和描述",
+    "validationEmployee": "请选择IT人员",
+    "validationNotes": "请填写解决方案备注"
+  },
+  "create": {
+    "title": "创建新工单",
+    "submitButton": "提交工单",
+    "aiHint": "提交后，AI将自动分析您的问题并提供解决建议，请稍候..."
+  }
+}

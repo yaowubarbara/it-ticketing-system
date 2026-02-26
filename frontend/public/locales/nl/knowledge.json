@@ -1,0 +1,47 @@
+{
+  "title": "Kennisbank",
+  "stats": {
+    "total": "{{count}} kennisdocumenten",
+    "usageCount": "Gebruiksaantal",
+    "successRate": "Succespercentage"
+  },
+  "list": {
+    "noDocuments": "Nog geen kennisdocumenten. Klik op \"Document Aanmaken\" om te beginnen!"
+  },
+  "actions": {
+    "createDocument": "Document Aanmaken",
+    "editDocument": "Bewerken",
+    "deleteDocument": "Verwijderen"
+  },
+  "form": {
+    "title": "Titel",
+    "content": "Inhoud",
+    "category": "Categorie",
+    "tags": "Tags",
+    "contentPlaceholder": "Gedetailleerde beschrijving van de oplossing...",
+    "tagsPlaceholder": "Scheid meerdere tags met komma's, bijv.: printer, HP, kleur"
+  },
+  "dialog": {
+    "createTitle": "Kennisdocument Aanmaken",
+    "editTitle": "Kennisdocument Bewerken",
+    "deleteTitle": "Verwijdering Bevestigen",
+    "deleteConfirm": "Weet je zeker dat je het kennisdocument \"{{title}}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+    "aiHint": "Vectoren worden automatisch gegenereerd na opslaan voor AI-gestuurde aanbevelingen van vergelijkbare gevallen"
+  },
+  "messages": {
+    "createSuccess": "Kennisdocument succesvol aangemaakt! Vectoren zijn gegenereerd.",
+    "createError": "Aanmaken mislukt",
+    "updateSuccess": "Kennisdocument succesvol bijgewerkt! Vectoren zijn opnieuw gegenereerd.",
+    "updateError": "Bijwerken mislukt",
+    "deleteSuccess": "Kennisdocument verwijderd!",
+    "deleteError": "Verwijderen mislukt",
+    "loadError": "Laden van kennisbank mislukt"
+  },
+  "category": {
+    "hardware": "Hardwareprobleem",
+    "software": "Softwareprobleem",
+    "network": "Netwerkprobleem",
+    "permission": "Toestemmingsprobleem",
+    "other": "Anders"
+  }
+}

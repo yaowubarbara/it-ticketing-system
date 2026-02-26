@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Card, CardContent, Typography, Chip, Box, Grid,
   CircularProgress, Alert, Button,
   TextField, MenuItem, InputAdornment, Paper
 } from '@mui/material';
 import { Refresh, Search } from '@mui/icons-material';
+import { format } from 'date-fns';
+import { zhCN, enUS, fr, nl } from 'date-fns/locale';
 import { ticketAPI } from '../services/api';
 
 function TicketList() {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation(['common', 'ticket']);
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Date locale mapping
+  const localeMap = { zh: zhCN, en: enUS, fr: fr, nl: nl };
+  const currentLocale = localeMap[i18n.language] || enUS;
 
   // 过滤和搜索状态
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -31,7 +39,7 @@ function TicketList() {
       const response = await ticketAPI.getTickets();
       setTickets(response.data);
     } catch (err) {
-      setError('加载工单失败: ' + err.message);
+      setError(t('ticket:messages.loadError') + ': ' + err.message);
       console.error('Error loading tickets:', err);
     } finally {
       setLoading(false);
@@ -82,15 +90,7 @@ function TicketList() {
     return colors[status] || 'default';
   };
 
-  const getStatusText = (status) => {
-    const texts = {
-      pending: '待处理',
-      in_progress: '处理中',
-      resolved: '已解决',
-      closed: '已关闭',
-    };
-    return texts[status] || status;
-  };
+  const getStatusText = (status) => t(`ticket:status.${status}`, status);
 
   const getPriorityColor = (priority) => {
     const colors = {
@@ -102,26 +102,9 @@ function TicketList() {
     return colors[priority] || 'default';
   };
 
-  const getPriorityText = (priority) => {
-    const texts = {
-      low: '低',
-      medium: '中',
-      high: '高',
-      urgent: '紧急',
-    };
-    return texts[priority] || priority;
-  };
+  const getPriorityText = (priority) => t(`ticket:priority.${priority}`, priority);
 
-  const getCategoryText = (category) => {
-    const texts = {
-      hardware: '硬件',
-      software: '软件',
-      network: '网络',
-      permission: '权限',
-      other: '其他',
-    };
-    return texts[category] || category;
-  };
+  const getCategoryText = (category) => t(`ticket:categoryShort.${category}`, category);
 
   if (loading) {
     return (
@@ -135,7 +118,7 @@ function TicketList() {
     return (
       <Alert severity="error" action={
         <Button color="inherit" size="small" onClick={loadTickets}>
-          重试
+          {t('common:actions.retry')}
         </Button>
       }>
         {error}
@@ -148,14 +131,14 @@ function TicketList() {
       {/* 标题栏 */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Typography variant="h4" component="h1">
-          📋 工单列表
+          📋 {t('ticket:list.title')}
         </Typography>
         <Button
           variant="outlined"
           startIcon={<Refresh />}
           onClick={loadTickets}
         >
-          刷新
+          {t('common:actions.refresh')}
         </Button>
       </Box>
 
@@ -164,7 +147,7 @@ function TicketList() {
         {/* 搜索框 */}
         <TextField
           fullWidth
-          placeholder="搜索工单标题、描述或编号..."
+          placeholder={t('ticket:list.searchPlaceholder')}
           value={searchKeyword}
           onChange={(e) => setSearchKeyword(e.target.value)}
           InputProps={{
@@ -183,15 +166,15 @@ function TicketList() {
             <TextField
               select
               fullWidth
-              label="状态"
+              label={t('ticket:list.statusFilter')}
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
             >
-              <MenuItem value="all">全部状态</MenuItem>
-              <MenuItem value="pending">待处理</MenuItem>
-              <MenuItem value="in_progress">处理中</MenuItem>
-              <MenuItem value="resolved">已解决</MenuItem>
-              <MenuItem value="closed">已关闭</MenuItem>
+              <MenuItem value="all">{t('ticket:list.allStatuses')}</MenuItem>
+              <MenuItem value="pending">{t('ticket:status.pending')}</MenuItem>
+              <MenuItem value="in_progress">{t('ticket:status.in_progress')}</MenuItem>
+              <MenuItem value="resolved">{t('ticket:status.resolved')}</MenuItem>
+              <MenuItem value="closed">{t('ticket:status.closed')}</MenuItem>
             </TextField>
           </Grid>
 
@@ -199,16 +182,16 @@ function TicketList() {
             <TextField
               select
               fullWidth
-              label="类别"
+              label={t('ticket:list.categoryFilter')}
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
             >
-              <MenuItem value="all">全部类别</MenuItem>
-              <MenuItem value="hardware">硬件问题</MenuItem>
-              <MenuItem value="software">软件问题</MenuItem>
-              <MenuItem value="network">网络问题</MenuItem>
-              <MenuItem value="permission">权限问题</MenuItem>
-              <MenuItem value="other">其他</MenuItem>
+              <MenuItem value="all">{t('ticket:list.allCategories')}</MenuItem>
+              <MenuItem value="hardware">{t('ticket:category.hardware')}</MenuItem>
+              <MenuItem value="software">{t('ticket:category.software')}</MenuItem>
+              <MenuItem value="network">{t('ticket:category.network')}</MenuItem>
+              <MenuItem value="permission">{t('ticket:category.permission')}</MenuItem>
+              <MenuItem value="other">{t('ticket:category.other')}</MenuItem>
             </TextField>
           </Grid>
 
@@ -216,15 +199,15 @@ function TicketList() {
             <TextField
               select
               fullWidth
-              label="优先级"
+              label={t('ticket:list.priorityFilter')}
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value)}
             >
-              <MenuItem value="all">全部优先级</MenuItem>
-              <MenuItem value="low">低</MenuItem>
-              <MenuItem value="medium">中</MenuItem>
-              <MenuItem value="high">高</MenuItem>
-              <MenuItem value="urgent">紧急</MenuItem>
+              <MenuItem value="all">{t('ticket:list.allPriorities')}</MenuItem>
+              <MenuItem value="low">{t('ticket:priority.low')}</MenuItem>
+              <MenuItem value="medium">{t('ticket:priority.medium')}</MenuItem>
+              <MenuItem value="high">{t('ticket:priority.high')}</MenuItem>
+              <MenuItem value="urgent">{t('ticket:priority.urgent')}</MenuItem>
             </TextField>
           </Grid>
         </Grid>
@@ -233,16 +216,16 @@ function TicketList() {
       {/* 统计信息 */}
       <Box mb={3}>
         <Typography variant="body2" color="text.secondary">
-          显示 {filteredTickets.length} 个工单（共 {tickets.length} 个）
+          {t('ticket:list.showingResults', { count: filteredTickets.length, total: tickets.length })}
         </Typography>
       </Box>
 
       {/* 工单列表 */}
       {filteredTickets.length === 0 ? (
         <Alert severity="info">
-          {tickets.length === 0 
-            ? '暂无工单，点击顶部"创建工单"按钮创建第一个工单吧！'
-            : "没有符合条件的工单"
+          {tickets.length === 0
+            ? t('ticket:list.noTickets')
+            : t('ticket:list.noMatchingTickets')
           }
         </Alert>
       ) : (
@@ -311,7 +294,7 @@ function TicketList() {
 
                   {/* 创建时间 */}
                   <Typography variant="caption" color="text.secondary" display="block" mt={1}>
-                    创建于: {new Date(ticket.created_at).toLocaleString('zh-CN')}
+                    {t('ticket:list.createdAt')}: {format(new Date(ticket.created_at), 'PPpp', { locale: currentLocale })}
                   </Typography>
                 </CardContent>
               </Card>

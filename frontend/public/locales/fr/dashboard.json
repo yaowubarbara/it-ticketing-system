@@ -1,0 +1,31 @@
+{
+  "title": "Tableau de Bord",
+  "stats": {
+    "totalTickets": "Tickets Totaux",
+    "pending": "En Attente",
+    "inProgress": "En Cours",
+    "completed": "Terminés"
+  },
+  "categoryDistribution": {
+    "title": "Distribution par Catégorie",
+    "hardware": "Problèmes Matériels",
+    "software": "Problèmes Logiciels",
+    "network": "Problèmes Réseau",
+    "permission": "Problèmes de Permission",
+    "other": "Autre"
+  },
+  "priorityDistribution": {
+    "title": "Distribution par Priorité",
+    "urgent": "Tickets Urgents",
+    "high": "Priorité Élevée",
+    "medium": "Priorité Moyenne",
+    "low": "Priorité Faible"
+  },
+  "alerts": {
+    "urgentTickets": "Attention : Il y a {{count}} tickets urgents nécessitant une attention immédiate !",
+    "pendingTickets": "Avis : Il y a {{count}} tickets en attente d'assignation."
+  },
+  "errors": {
+    "loadFailed": "Échec du chargement des données"
+  }
+}

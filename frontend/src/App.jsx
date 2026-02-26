@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Container, Button, Box } from '@mui/material';
 import { Home, Add, Book, Dashboard as DashIcon } from '@mui/icons-material';
 import { ToastContainer } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Dashboard from './components/Dashboard';
@@ -9,8 +10,11 @@ import TicketList from './components/TicketList';
 import CreateTicket from './components/CreateTicket';
 import TicketDetail from './components/TicketDetail';
 import KnowledgeBase from './components/KnowledgeBase';
+import LanguageSwitcher from './components/LanguageSwitcher';
 
 function App() {
+  const { t } = useTranslation(['common']);
+
   return (
     <Router>
       <Box sx={{ flexGrow: 1 }}>
@@ -18,20 +22,21 @@ function App() {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              🎫 IT工单系统
+              🎫 {t('common:appTitle')}
             </Typography>
             <Button color="inherit" component={Link} to="/" startIcon={<DashIcon />}>
-              统计看板
+              {t('common:nav.dashboard')}
             </Button>
             <Button color="inherit" component={Link} to="/tickets" startIcon={<Home />}>
-              工单列表
+              {t('common:nav.ticketList')}
             </Button>
             <Button color="inherit" component={Link} to="/create" startIcon={<Add />}>
-              创建工单
+              {t('common:nav.createTicket')}
             </Button>
             <Button color="inherit" component={Link} to="/knowledge" startIcon={<Book />}>
-              知识库
+              {t('common:nav.knowledgeBase')}
             </Button>
+            <LanguageSwitcher />
           </Toolbar>
         </AppBar>
 
