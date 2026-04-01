@@ -16,7 +16,7 @@
 
 ## Demo
 
-https://github.com/yaowubarbara/it-ticketing-system/raw/main/demo.mp4
+![Demo](demo.gif)
 
 ## Key Features
 
