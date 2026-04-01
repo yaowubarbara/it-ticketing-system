@@ -8,6 +8,10 @@ Internal IT support ticketing platform with AI-assisted ticket analysis, 4-langu
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)
 ![Celery](https://img.shields.io/badge/Celery-5-37814A?logo=celery)
 
+## Demo
+
+[![Watch Demo](https://img.shields.io/badge/▶_Watch_Demo-blue?style=for-the-badge)](https://www.barbarawu.dev/videos/it-ticketing-demo.mp4)
+
 ## Architecture
 
 ```
